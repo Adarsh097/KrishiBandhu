@@ -28,7 +28,14 @@ const register = async (req, res) => {
       await existingUser.save();
       
       // Send OTP email
-      await sendOTPEmail(email, name, otp);
+      const emailResult = await sendOTPEmail(email, name, otp);
+      
+      if (!emailResult.success) {
+        return res.status(500).json({
+          success: false,
+          message: 'User updated but failed to send OTP email. Please try resending.'
+        });
+      }
       
       return res.status(200).json({
         success: true,
