@@ -17,3 +17,7 @@ output "vpc_cidr_block" {
   description = "CIDR block of the VPC"
   value       = module.vpc.vpc_cidr_block
 }
+output "intra_subnets" {
+  description = "Intra subnet IDs"
+  value = module.vpc.intra_subnets
+}
